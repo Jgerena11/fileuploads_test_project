@@ -1,4 +1,4 @@
-<%= form_with(model: movie_album, local: true) do |form| %>
+<%= form_with(model: movie_album, local: true) do |f| %>
   <% if movie_album.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(movie_album.errors.count, "error") %> prohibited this movie_album from being saved:</h2>
@@ -10,8 +10,17 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :images, "upload movie images: " %>
+    <%= f.file_field :images, multiple: true, name: "images[image]" %>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>

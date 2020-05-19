@@ -24,10 +24,12 @@ class MovieAlbumsController < ApplicationController
   # POST /movie_albums
   # POST /movie_albums.json
   def create
-    @movie_album = MovieAlbum.new(movie_album_params)
+    @movie_album = MovieAlbum.new(permitted_params)
 
     respond_to do |format|
       if @movie_album.save
+        @movie_album.images.attach(params[:movie_album][:images])
+        # binding.pry
         format.html { redirect_to @movie_album, notice: 'Movie album was successfully created.' }
         format.json { render :show, status: :created, location: @movie_album }
       else
@@ -41,7 +43,7 @@ class MovieAlbumsController < ApplicationController
   # PATCH/PUT /movie_albums/1.json
   def update
     respond_to do |format|
-      if @movie_album.update(movie_album_params)
+      if @movie_album.update(permitted_params)
         format.html { redirect_to @movie_album, notice: 'Movie album was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie_album }
       else
@@ -67,8 +69,7 @@ class MovieAlbumsController < ApplicationController
       @movie_album = MovieAlbum.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def movie_album_params
-      params.fetch(:movie_album, {})
+    def permitted_params
+      params.require(:movie_album).permit(:title, images: [])
     end
 end

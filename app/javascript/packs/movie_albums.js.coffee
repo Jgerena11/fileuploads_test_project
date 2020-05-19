@@ -1,2 +1,3 @@
 jQuery ->
-  $('#new_movie').fileupload()
+  $('#new_movie_album').fileupload
+    dataType: "script"
