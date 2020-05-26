@@ -28,8 +28,6 @@ class MovieAlbumsController < ApplicationController
 
     respond_to do |format|
       if @movie_album.save
-        @movie_album.images.attach(params[:movie_album][:images])
-        # binding.pry
         format.html { redirect_to @movie_album, notice: 'Movie album was successfully created.' }
         format.json { render :show, status: :created, location: @movie_album }
       else
