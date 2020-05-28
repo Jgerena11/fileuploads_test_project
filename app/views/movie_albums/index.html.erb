@@ -1,25 +1,24 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Movie Albums</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movie_albums.each do |movie_album| %>
-      <tr>
-        <td><%= link_to 'Show', movie_album %></td>
-        <td><%= link_to 'Edit', edit_movie_album_path(movie_album) %></td>
-        <td><%= link_to 'Destroy', movie_album, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <%= link_to 'New Movie Album', new_movie_album_path %>
+
+<div id="movie_albums">
+  <ul>
+    <% @movie_albums.each do |movie_album| %>
+    <section class="movie album">
+      <div class="title">
+        <h1><%= movie_album.title %></h1>
+      </div>
+      <div>
+        <%= link_to 'Show', movie_album %>
+        <%= link_to 'Edit', edit_movie_album_path(movie_album) %>
+        <%= link_to 'Destroy', movie_album, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      <div class="image">
+          <% movie_album.images.each do |image| %>
+            <%= image_tag(image) %>
+          <% end %>
+      </div>
+
+    </section>
+    <% end %>
+  </ul>
+</div>
