@@ -1,0 +1,31 @@
+<%= form_with(model: movie, local: true) do |fo| %>
+  <% if movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+        <% movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="fieldset">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :image, 'Upload movies:' %>
+    <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+
+    <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%=o.name%}
+      <div class="progress"><div class="bar" style="width: 0%"></div></div>
+    </div>
+    </script>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

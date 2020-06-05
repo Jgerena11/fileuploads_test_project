@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Movie Gallery</h1>
+
+<div id="movies">
+  <%= render @movies %>
+</div>
+
+<div class="clear"></div>
+
+<%= form_for Movie.new do |f| %>
+  <%= f.label :image, 'Upload movies:' %>
+  <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+<% end %>
+
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+  {%=o.name%}
+  <div class="progress"><div class="bar" style="width: 0%"></div></div>
+</div>
+</script>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Movie', new_movie_path %>
