@@ -1,0 +1,5 @@
+<% if @movie_album.new_record? %>
+  alert("Failed to upload movie album: <%= j @movie_album.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $("#movie_images").append("<%= j render(@movie_album) %>");
+<% end %>

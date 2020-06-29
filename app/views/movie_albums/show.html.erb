@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_movie_album_path(@movie_album) %> |
+<%= link_to 'Back', movie_albums_path %>
+
+<h1><%= @movie_album.title %></h1>
+<div class='image'>
+  <% @movie_album.images.each do |image| %>
+    <%= image_tag image %>
+  <% end %>
+</div>

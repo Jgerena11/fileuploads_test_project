@@ -1,0 +1,34 @@
+<%= form_with(model: movie_album, local: false) do |f| %>
+
+  <% if movie_album.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(movie_album.errors.count, "error") %> prohibited this movie_album from being saved:</h2>
+
+      <ul>
+        <% movie_album.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="fileupload", id='new_images'>
+    <%= f.label :images, "upload movie images: " %>
+    <%= f.file_field :images, multiple: true, name: "new_images[image]", movie_albums: true %>
+
+    <script id="template-upload" type="text/x-tmpl">
+      <div class="upload">
+        {%=o.name%}
+        <div class="progress"><div class="bar" style="width: 0%;"></div></div>
+      </div>
+    </script>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
